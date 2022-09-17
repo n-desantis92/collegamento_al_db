@@ -22,13 +22,19 @@ function getRandEmail($name){
     $rand1 = mt_rand(0, count($domains) -1);
 
     return strtolower(str_replace(' ','.',$name).mt_rand(10,99).'@'.$domains[$rand1]);
-}
+};
+
 
 // echo getRandEmail(getRandName());
 
 function getRandFiscalCode(){
-    $i = 16;
+    $i = 6;
     $res = '';
+    $day = getRandDay();
+    $mounth = chr(mt_rand(65, 76));
+    $fiscaldate = getRandNum();
+    $comune = chr(mt_rand(65, 90)) . mt_rand(0, 9). mt_rand(0, 9). mt_rand(0, 9). chr(mt_rand(65, 90));
+
 
     while ($i > 0) {
         $res .= chr(mt_rand(65,90));
@@ -37,7 +43,28 @@ function getRandFiscalCode(){
     }
 
 
-    return $res;
-}
+    return $res.$fiscaldate.$mounth.$day.$comune;
+};
 
 echo getRandFiscalCode();
+
+function getRandNum() {
+    $num1 = mt_rand(0, 9);
+    $num2 = mt_rand(0, 9);
+
+    return $num1.$num2;
+}
+
+// echo getRandNum() .'<br>';
+
+function getRandDay()
+{
+    $num = mt_rand(0, 31);
+
+    if ($num < 10){
+        $num = '0'.$num;
+    }
+    return $num;
+}
+
+// echo getRandDay();
